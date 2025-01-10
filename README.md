@@ -16,8 +16,12 @@
 
 
 - 커밋 메세지 규칙
-  - [Info/Error/Review] 구체적인 설명
-  - `[Review] 강아지 쓰다듬기 프로그램 제작`
+  - 커밋 제목
+    - [Info/Error/Review] 구체적인 설명
+    - `[Review] 강아지 쓰다듬기 프로그램 제작`
+  - 커밋 내용
+    - 자유형식
+    - `pr_template` 참고
 
 
 - 라벨
