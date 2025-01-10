@@ -1,0 +1,33 @@
+name: Assign Random Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]  # PR 열기, 수정, 다시 열기 시 트리
+
+permissions:
+  contents: read  # 리포지토리 내용을 읽을 권한 부여
+  pull-requests: write  # PR에 리뷰어를 요청할 수 있도록 권한 부여
+
+jobs:
+  assign-reviewer:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install @actions/core @actions/github
+
+      - name: Run random reviewer script
+        run: |
+          node ./scripts/random-reviewer.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          REVIEWERS: '[{"githubName": "드림돌이", "slackUserId": "U087HDV9J23"}, {"githubName": "드밝꿈미힘", "slackUserId": "U087HDV9J23"}, {"githubName": "디리링", "slackUserId": "U087HDV9J23"}, {"githubName": "HamsterStudent", "slackUserId": "U087HDV9J23"}]'
